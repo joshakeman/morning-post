@@ -12,7 +12,8 @@ func main() {
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println(body)
+
+	marshalXML(body)
 }
 
 func getFeed(url string) (io.ReadCloser, error) {
@@ -26,7 +27,16 @@ func getFeed(url string) (io.ReadCloser, error) {
 	return resp.Body, nil
 }
 
-func MarshalXML(body io.ReadCloser)
+func marshalXML(body io.ReadCloser) {
+	var feed Feed
+	var bts []byte
+
+	n, err := body.Read(bts)
+	if err != nil {
+		log.Println(err)
+	}
+	xml.Unmarshal(bts, &feed)
+}
 
 type Feed struct {
 	XMLName   xml.Name `xml:"feed"`
