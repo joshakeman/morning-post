@@ -1,20 +1,13 @@
 package main
 
 import (
+	"encoding/xml"
 	"io"
 	"log"
 	"net/http"
 )
 
 func main() {
-	// resp, err := http.Get("https://www.reddit.com/r/golang/.rss?format=xml")
-	// if err != nil {
-	// 	log.Println(err)
-	// }
-	// defer resp.Body.Close()
-
-	// content := xml.NewDecoder(resp.Body)
-	// log.Println(content)
 	body, err := getFeed("https://www.reddit.com/r/golang/.rss?format=xml")
 	if err != nil {
 		log.Println(err)
@@ -31,4 +24,17 @@ func getFeed(url string) (io.ReadCloser, error) {
 	defer resp.Body.Close()
 
 	return resp.Body, nil
+}
+
+func MarshalXML(body io.ReadCloser)
+
+type Feed struct {
+	XMLName   xml.Name `xml:"feed"`
+	EntryList []Entry  `xml:entry`
+}
+
+type Entry struct {
+	XMLName xml.Name `xml:"entry"`
+	Title   string   `xml:"title"`
+	Content string   `xml:"content"`
 }
