@@ -2,18 +2,30 @@ package main
 
 import (
 	"io"
-	"log"
+	"net/http"
+	"net/http/httptest"
+	"os"
 	"testing"
 )
 
 func TestGetFeed(t *testing.T) {
-	body, err := getFeed("https://www.reddit.com/r/golang/.rss?format=xml")
+	t.Parallel()
+	ts := httptest.NewTLSServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		f, err := os.Open("testdata/feed.xml")
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer f.Close()
+		io.Copy(w, f)
+	}))
+	c := NewClient()
+	c.HTTPClient = ts.Client()
+	feed, err := c.getFeed(ts.URL)
 	if err != nil {
-		log.Println(err)
+		t.Fatal(err)
 	}
-
-	_, ok := body.(io.ReadCloser)
-	if ok != true {
-		t.Errorf("getFeed did not return an io.ReadCloser")
+	if len(feed.EntryList) == 0 {
+		t.Fatal("EntryList is empty")
 	}
 }

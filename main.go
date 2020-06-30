@@ -2,40 +2,43 @@ package main
 
 import (
 	"encoding/xml"
-	"io"
-	"log"
+	"fmt"
+	"io/ioutil"
 	"net/http"
 )
 
-func main() {
-	body, err := getFeed("https://www.reddit.com/r/golang/.rss?format=xml")
-	if err != nil {
-		log.Println(err)
-	}
+// func main() {
+// 	_, err := getFeed("https://www.reddit.com/r/golang/.rss?format=xml")
+// 	if err != nil {
+// 		log.Println(err)
+// 	}
+// }
 
-	marshalXML(body)
+type Client struct {
+	HTTPClient *http.Client
 }
 
-func getFeed(url string) (io.ReadCloser, error) {
-	resp, err := http.Get("https://www.reddit.com/r/golang/.rss?format=xml")
+func NewClient() Client {
+	return Client{
+		HTTPClient: http.DefaultClient,
+	}
+}
+
+func (c Client) getFeed(url string) (Feed, error) {
+	resp, err := c.HTTPClient.Get(url)
 	if err != nil {
-		log.Println(err)
-		return nil, err
+		return Feed{}, err
 	}
 	defer resp.Body.Close()
-
-	return resp.Body, nil
-}
-
-func marshalXML(body io.ReadCloser) {
-	var feed Feed
-	var bts []byte
-
-	n, err := body.Read(bts)
+	data, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Println(err)
+		return Feed{}, err
 	}
-	xml.Unmarshal(bts, &feed)
+	var feed Feed
+	if err = xml.Unmarshal(data, &feed); err != nil {
+		return Feed{}, fmt.Errorf("decoding xml %q: %v", data, err)
+	}
+	return feed, nil
 }
 
 type Feed struct {
