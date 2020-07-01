@@ -29,22 +29,22 @@ func getFeed(url string) (io.ReadCloser, error) {
 
 func marshalXML(body io.ReadCloser) {
 	var feed Feed
-	var bts []byte
 
-	n, err := body.Read(bts)
+	z, err := xml.Marshal(body)
 	if err != nil {
 		log.Println(err)
 	}
-	xml.Unmarshal(bts, &feed)
+
+	xml.Unmarshal(z, &feed)
 }
 
 type Feed struct {
 	XMLName   xml.Name `xml:"feed"`
-	EntryList []Entry  `xml:entry`
+	EntryList []Entry  `xml:"entry"`
 }
 
 type Entry struct {
 	XMLName xml.Name `xml:"entry"`
 	Title   string   `xml:"title"`
-	Content string   `xml:"content"`
+	Content string   `xml:"content,innerxml"`
 }
