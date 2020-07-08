@@ -106,18 +106,22 @@ func main() {
 	// with some interesting kind of trend.
 	randomPoints := func(n int) plotter.XYs {
 		pts := make(plotter.XYs, n)
-		for i := range pts {
-			if i == 0 {
-				pts[i].X = rnd.Float64()
-			} else {
-				pts[i].X = pts[i-1].X + rnd.Float64()
-			}
-			pts[i].Y = pts[i].X + 10*rnd.Float64()
+		// for i := range pts {
+		// 	if i == 0 {
+		// 		pts[i].X = rnd.Float64()
+		// 	} else {
+		// 		pts[i].X = pts[i-1].X + rnd.Float64()
+		// 	}
+		// 	pts[i].Y = pts[i].X + 10*rnd.Float64()
+		// }
+		for i := 0; i < n; i++ {
+			pts[i].X = float64(i)
+			pts[i].Y = float64(rnd.Intn(10))
 		}
 		return pts
 	}
 
-	n := 5
+	n := 15
 	scatterData := randomPoints(n)
 	// scatterData := plotter.XYs{
 	// 	{
@@ -125,7 +129,7 @@ func main() {
 	// 		Y: 5,
 	// 	},
 	// }
-	// lineData := randomPoints(n)
+	lineData := randomPoints(n)
 	// linePointsData := randomPoints(n)
 
 	p, err := plot.New()
@@ -144,13 +148,13 @@ func main() {
 	s.GlyphStyle.Color = color.RGBA{R: 255, B: 128, A: 255}
 	s.GlyphStyle.Radius = vg.Points(3)
 
-	// l, err := plotter.NewLine(lineData)
-	// if err != nil {
-	// 	log.Panic(err)
-	// }
-	// l.LineStyle.Width = vg.Points(1)
-	// l.LineStyle.Dashes = []vg.Length{vg.Points(5), vg.Points(5)}
-	// l.LineStyle.Color = color.RGBA{B: 255, A: 255}
+	l, err := plotter.NewLine(lineData)
+	if err != nil {
+		log.Panic(err)
+	}
+	l.LineStyle.Width = vg.Points(1)
+	l.LineStyle.Dashes = []vg.Length{vg.Points(5), vg.Points(5)}
+	l.LineStyle.Color = color.RGBA{B: 255, A: 255}
 
 	// lpLine, lpPoints, err := plotter.NewLinePoints(linePointsData)
 	// if err != nil {
@@ -160,12 +164,15 @@ func main() {
 	// lpPoints.Shape = draw.CircleGlyph{}
 	// lpPoints.Color = color.RGBA{R: 255, A: 255}
 
-	p.Add(s)
-	p.Legend.Add("scatter", s)
+	p.Add(s, l)
+	p.X.Max = float64(n)
+	p.Y.Max = 10
+
+	// p.Legend.Add("scatter", s)
 	// p.Legend.Add("line", l)
 	// p.Legend.Add("line points", lpLine, lpPoints)
 
-	err = p.Save(200, 200, "testdata/scatter.png")
+	err = p.Save(600, 200, "testdata/scatter.png")
 	if err != nil {
 		log.Panic(err)
 	}
