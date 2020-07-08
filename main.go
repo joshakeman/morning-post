@@ -1,53 +1,172 @@
-package main
+// package main
 
-import (
-	"encoding/xml"
-	"fmt"
-	"io/ioutil"
-	"net/http"
-)
+// import (
+// 	"encoding/xml"
+// 	"fmt"
+// 	"io/ioutil"
+// 	"net/http"
+// )
 
-// func main() {
-// 	_, err := getFeed("https://www.reddit.com/r/golang/.rss?format=xml")
-// 	if err != nil {
-// 		log.Println(err)
+// // func main() {
+// // 	_, err := getFeed("https://www.reddit.com/r/golang/.rss?format=xml")
+// // 	if err != nil {
+// // 		log.Println(err)
+// // 	}
+// // }
+
+// type Client struct {
+// 	HTTPClient *http.Client
+// }
+
+// func NewClient() Client {
+// 	return Client{
+// 		HTTPClient: http.DefaultClient,
 // 	}
 // }
 
-type Client struct {
-	HTTPClient *http.Client
-}
+// func (c Client) getFeed(url string) (Feed, error) {
+// 	resp, err := c.HTTPClient.Get(url)
+// 	if err != nil {
+// 		return Feed{}, err
+// 	}
+// 	defer resp.Body.Close()
+// 	data, err := ioutil.ReadAll(resp.Body)
+// 	if err != nil {
+// 		return Feed{}, err
+// 	}
+// 	var feed Feed
+// 	if err = xml.Unmarshal(data, &feed); err != nil {
+// 		return Feed{}, fmt.Errorf("decoding xml %q: %v", data, err)
+// 	}
+// 	return feed, nil
+// }
 
-func NewClient() Client {
-	return Client{
-		HTTPClient: http.DefaultClient,
+// type Feed struct {
+// 	XMLName   xml.Name `xml:"feed"`
+// 	EntryList []Entry  `xml:entry`
+// }
+
+// type Entry struct {
+// 	XMLName xml.Name `xml:"entry"`
+// 	Title   string   `xml:"title"`
+// 	Content string   `xml:"content"`
+// }
+
+// package main
+
+// import (
+// 	"fmt"
+// 	"math/rand"
+// 	"time"
+// )
+
+// func main() {
+
+// 	generateLines()
+// }
+
+// func generateLines() {
+// 	rand.Seed(time.Now().UnixNano())
+
+// 	ret := "X"
+// 	for x := 0; x < 10; x++ {
+// 		no := rand.Intn(10)
+// 		// no := 3
+// 		lines := ""
+// 		for y := 0; y < no; y++ {
+// 			lines += "\n"
+// 		}
+// 		ret += lines
+// 		for z := 0; z < x; z++ {
+// 			ret += "\t"
+// 		}
+// 		ret += "X"
+// 	}
+// 	ret += "\n"
+// 	fmt.Printf(ret)
+// }
+
+package main
+
+import (
+	"image/color"
+	"log"
+	"math/rand"
+	"time"
+
+	"gonum.org/v1/plot"
+	"gonum.org/v1/plot/plotter"
+	"gonum.org/v1/plot/vg"
+)
+
+func main() {
+	rnd := rand.New(rand.NewSource(time.Now().UnixNano()))
+
+	// randomPoints returns some random x, y points
+	// with some interesting kind of trend.
+	randomPoints := func(n int) plotter.XYs {
+		pts := make(plotter.XYs, n)
+		for i := range pts {
+			if i == 0 {
+				pts[i].X = rnd.Float64()
+			} else {
+				pts[i].X = pts[i-1].X + rnd.Float64()
+			}
+			pts[i].Y = pts[i].X + 10*rnd.Float64()
+		}
+		return pts
 	}
-}
 
-func (c Client) getFeed(url string) (Feed, error) {
-	resp, err := c.HTTPClient.Get(url)
+	n := 5
+	scatterData := randomPoints(n)
+	// scatterData := plotter.XYs{
+	// 	{
+	// 		X: 10,
+	// 		Y: 5,
+	// 	},
+	// }
+	// lineData := randomPoints(n)
+	// linePointsData := randomPoints(n)
+
+	p, err := plot.New()
 	if err != nil {
-		return Feed{}, err
+		log.Panic(err)
 	}
-	defer resp.Body.Close()
-	data, err := ioutil.ReadAll(resp.Body)
+	p.Title.Text = "Points Example"
+	p.X.Label.Text = "X"
+	p.Y.Label.Text = "Y"
+	p.Add(plotter.NewGrid())
+
+	s, err := plotter.NewScatter(scatterData)
 	if err != nil {
-		return Feed{}, err
+		log.Panic(err)
 	}
-	var feed Feed
-	if err = xml.Unmarshal(data, &feed); err != nil {
-		return Feed{}, fmt.Errorf("decoding xml %q: %v", data, err)
+	s.GlyphStyle.Color = color.RGBA{R: 255, B: 128, A: 255}
+	s.GlyphStyle.Radius = vg.Points(3)
+
+	// l, err := plotter.NewLine(lineData)
+	// if err != nil {
+	// 	log.Panic(err)
+	// }
+	// l.LineStyle.Width = vg.Points(1)
+	// l.LineStyle.Dashes = []vg.Length{vg.Points(5), vg.Points(5)}
+	// l.LineStyle.Color = color.RGBA{B: 255, A: 255}
+
+	// lpLine, lpPoints, err := plotter.NewLinePoints(linePointsData)
+	// if err != nil {
+	// 	log.Panic(err)
+	// }
+	// lpLine.Color = color.RGBA{G: 255, A: 255}
+	// lpPoints.Shape = draw.CircleGlyph{}
+	// lpPoints.Color = color.RGBA{R: 255, A: 255}
+
+	p.Add(s)
+	p.Legend.Add("scatter", s)
+	// p.Legend.Add("line", l)
+	// p.Legend.Add("line points", lpLine, lpPoints)
+
+	err = p.Save(200, 200, "testdata/scatter.png")
+	if err != nil {
+		log.Panic(err)
 	}
-	return feed, nil
-}
-
-type Feed struct {
-	XMLName   xml.Name `xml:"feed"`
-	EntryList []Entry  `xml:entry`
-}
-
-type Entry struct {
-	XMLName xml.Name `xml:"entry"`
-	Title   string   `xml:"title"`
-	Content string   `xml:"content"`
 }
