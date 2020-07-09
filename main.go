@@ -116,12 +116,12 @@ func main() {
 		// }
 		for i := 0; i < n; i++ {
 			pts[i].X = float64(i)
-			pts[i].Y = float64(rnd.Intn(10))
+			pts[i].Y = float64(rnd.Float32())
 		}
 		return pts
 	}
 
-	n := 15
+	n := 100
 	scatterData := randomPoints(n)
 	// scatterData := plotter.XYs{
 	// 	{
@@ -164,11 +164,11 @@ func main() {
 	// lpPoints.Shape = draw.CircleGlyph{}
 	// lpPoints.Color = color.RGBA{R: 255, A: 255}
 
-	p.Add(s, l)
-	p.X.Max = float64(n)
-	p.Y.Max = 10
+	p.Add(s)
+	// p.X.Max = float64(n)
+	// p.Y.Max = 10
 
-	// p.Legend.Add("scatter", s)
+	p.Legend.Add("scatter", s)
 	// p.Legend.Add("line", l)
 	// p.Legend.Add("line points", lpLine, lpPoints)
 
