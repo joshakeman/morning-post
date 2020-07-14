@@ -3,9 +3,13 @@ package main
 import (
 	"encoding/xml"
 	"fmt"
+	"html"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
+
+	"github.com/antchfx/htmlquery"
 )
 
 // func main() {
@@ -39,8 +43,19 @@ func (c Client) getFeed(url string) (Feed, error) {
 	if err = xml.Unmarshal(data, &feed); err != nil {
 		return Feed{}, fmt.Errorf("decoding xml %q: %v", data, err)
 	}
-	log.Println("First Link is: \n", feed.EntryList[0])
 	return feed, nil
+}
+
+func GetURL(s string) (string, error) {
+	esc := html.UnescapeString(s)
+	log.Println(esc)
+	doc, err := htmlquery.Parse(strings.NewReader(esc))
+	if err != nil {
+		return "", err
+	}
+	a := htmlquery.FindOne(doc, "//a[2]@href")
+	href := htmlquery.InnerText(a)
+	return href, nil
 }
 
 type Link struct {
@@ -58,3 +73,5 @@ type Entry struct {
 	Content string   `xml:"content"`
 	Link    Link     `xml:"link"`
 }
+
+// Created new Link struct that's embedded in Entry, allowing us to pull href value from that link.
