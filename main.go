@@ -2,40 +2,66 @@ package main
 
 import (
 	"encoding/xml"
-	"io"
+	"fmt"
+	"html"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
+
+	"github.com/antchfx/htmlquery"
 )
 
-func main() {
-	body, err := getFeed("https://www.reddit.com/r/golang/.rss?format=xml")
-	if err != nil {
-		log.Println(err)
-	}
+// func main() {
+// 	_, err := getFeed("https://www.reddit.com/r/golang/.rss?format=xml")
+// 	if err != nil {
+// 		log.Println(err)
+// 	}
+// }
 
-	marshalXML(body)
+type Client struct {
+	HTTPClient *http.Client
 }
 
-func getFeed(url string) (io.ReadCloser, error) {
-	resp, err := http.Get("https://www.reddit.com/r/golang/.rss?format=xml")
+func NewClient() Client {
+	return Client{
+		HTTPClient: http.DefaultClient,
+	}
+}
+
+func (c Client) getFeed(url string) (Feed, error) {
+	resp, err := c.HTTPClient.Get(url)
 	if err != nil {
-		log.Println(err)
-		return nil, err
+		return Feed{}, err
 	}
 	defer resp.Body.Close()
-
-	return resp.Body, nil
+	data, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return Feed{}, err
+	}
+	var feed Feed
+	if err = xml.Unmarshal(data, &feed); err != nil {
+		return Feed{}, fmt.Errorf("decoding xml %q: %v", data, err)
+	}
+	return feed, nil
 }
 
-func marshalXML(body io.ReadCloser) {
-	var feed Feed
-
-	z, err := xml.Marshal(body)
+func GetURL(s string) (string, error) {
+	esc := html.UnescapeString(s)
+	log.Println(esc)
+	doc, err := htmlquery.Parse(strings.NewReader(esc))
+  
 	if err != nil {
-		log.Println(err)
+		return "", err
 	}
+  
+	a := htmlquery.FindOne(doc, "//a[2]@href")
+	href := htmlquery.InnerText(a)
+	return href, nil
+}
 
-	xml.Unmarshal(z, &feed)
+type Link struct {
+	Href string `xml:"href,attr"`
 }
 
 type Feed struct {
@@ -46,5 +72,8 @@ type Feed struct {
 type Entry struct {
 	XMLName xml.Name `xml:"entry"`
 	Title   string   `xml:"title"`
-	Content string   `xml:"content,innerxml"`
+	Content string   `xml:"content"`
+	Link    Link     `xml:"link"`
 }
+
+// Created new Link struct that's embedded in Entry, allowing us to pull href value from that link.

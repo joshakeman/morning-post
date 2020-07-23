@@ -1,0 +1,312 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?> -->
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+    <category term="golang" label="r/golang"/>
+    <updated>2020-06-30T11:42:04+00:00</updated>
+    <icon>https://www.redditstatic.com/icon.png/</icon>
+    <id>/r/golang/.rss?format=xml</id>
+    <link rel="self" href="https://www.reddit.com/r/golang/.rss?format=xml" type="application/atom+xml" />
+    <link rel="alternate" href="https://www.reddit.com/r/golang/?format=xml" type="text/html" />
+    <logo>https://b.thumbs.redditmedia.com/7BDtSXbohQaPFuaa6oCA5HtE53Flgld6rj3G7-TavDs.png</logo>
+    <subtitle>Ask questions and post articles about the Go programming language and related tools, events etc.</subtitle>
+    <title>The Go Programming Language</title>
+    <entry>
+        <author>
+            <name>/u/Reddit_Randall</name>
+            <uri>https://www.reddit.com/user/Reddit_Randall</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;Why does Go not support const reference parameters similar to C++? Passing by value has overhead in making a copy and passing by pointer sacrifices the benefits of immutability. For a language that prides itself on performance and concurrency, const reference seems like such an obviously needed feature.&lt;/p&gt; &lt;pre&gt;&lt;code&gt;// Simple Go struct type Player struct { Name string Team string Age int PointsPerGame float64 AssistsPerGame float64 ReboundsPerGame float64 } // An entire new Player Struct is created everytime function is called func (p Player) SomeFunction() string { return fmt.Sprintf(&amp;quot;%s is %d years old.&amp;quot;, p.Name, p.Age) } // Vs pointer where copy is avoided but now allowing function to alter the struct // when that&amp;#39;s not necessary. func (p *Player) SomeFunction() string { return fmt.Sprintf(&amp;quot;%s is %d years old.&amp;quot;, p.Name, p.Age) } // Why not have the best of both worlds with something like func (p const *Player) SomeFunction() string { return fmt.Sprintf(&amp;quot;%s is %d years old.&amp;quot;, p.Name, p.Age) } &lt;/code&gt;&lt;/pre&gt; &lt;p&gt;Maybe I am overestimating the amount of resources spent on making a copy. But even in cases where the struct is small, it bothers me to think that anytime at all is being spent on making an unnecessary copy. Do you guys find yourselves using predominantly pointers (even when the function doesn&amp;#39;t modify the struct) or is worrying about this just me trying to prematurely optimize?&lt;/p&gt; &lt;p&gt;Any input is appreciated, I come from a Java and C++ background so the idea of pass by value for anything outside of primitive variable types is foreign to me.&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/Reddit_Randall&quot;&gt; /u/Reddit_Randall &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hikq9s/the_absence_of_const_reference_parameters_in_go/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hikq9s/the_absence_of_const_reference_parameters_in_go/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hikq9s</id>
+        <link href="https://www.reddit.com/r/golang/comments/hikq9s/the_absence_of_const_reference_parameters_in_go/" />
+        <updated>2020-06-30T10:24:43+00:00</updated>
+        <title>The absence of const reference parameters in Go</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/Pmgubbey1</name>
+            <uri>https://www.reddit.com/user/Pmgubbey1</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/Pmgubbey1&quot;&gt; /u/Pmgubbey1 &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.works-hub.com/jobs/remote-senior-go-engineer-e69?utm_source=Linkedin&amp;amp;utm_medium=Recruiter_Social&amp;amp;utm_campaign=p.gubbey&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hil0ox/senior_remote_golang_job/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hil0ox</id>
+        <link href="https://www.reddit.com/r/golang/comments/hil0ox/senior_remote_golang_job/" />
+        <updated>2020-06-30T10:47:05+00:00</updated>
+        <title>Senior Remote Golang Job</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/dafsic</name>
+            <uri>https://www.reddit.com/user/dafsic</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;I am writing a multi-coroutine task processing engine. Anyone want with me together.&lt;/p&gt; &lt;p&gt;I have 2+ years experience with golang, but i am just like a beginner. Maybe this is the philosophy of golang.&lt;/p&gt; &lt;p&gt;&lt;a href=&quot;https://github.com/90634/gotaskengine&quot;&gt;https://github.com/90634/gotaskengine&lt;/a&gt;&lt;/p&gt; &lt;p&gt;This is my first post. Is this correct behavior?&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/dafsic&quot;&gt; /u/dafsic &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hifopt/a_sample_task_engine/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hifopt/a_sample_task_engine/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hifopt</id>
+        <link href="https://www.reddit.com/r/golang/comments/hifopt/a_sample_task_engine/" />
+        <updated>2020-06-30T03:50:11+00:00</updated>
+        <title>A sample task engine</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/squirtle634</name>
+            <uri>https://www.reddit.com/user/squirtle634</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;Hi, I am learning Go and I have the following example&lt;/p&gt; &lt;pre&gt;&lt;code&gt;package main import ( &amp;quot;fmt&amp;quot; &amp;quot;sync&amp;quot; ) var wg = sync.WaitGroup{} func main() { ch := make(chan int) counter := 0 for j := 0; j &amp;lt; 5; j++ { wg.Add(2) go func() { i := &amp;lt;-ch fmt.Println(i) wg.Done() }() go func() { ch &amp;lt;- counter counter++ wg.Done() }() } wg.Wait() } &lt;/code&gt;&lt;/pre&gt; &lt;p&gt;the output is &lt;/p&gt; &lt;pre&gt;&lt;code&gt;0 1 1 0 2 &lt;/code&gt;&lt;/pre&gt; &lt;p&gt;How can the output contain two 0&amp;#39;s and two 1&amp;#39;s, because numbers 0,1,2,3,4 enter the channel exactly once and after receiving a number from the channel the channel becomes empty. Thanks in advance.&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/squirtle634&quot;&gt; /u/squirtle634 &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hikks9/question_about_go_channels/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hikks9/question_about_go_channels/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hikks9</id>
+        <link href="https://www.reddit.com/r/golang/comments/hikks9/question_about_go_channels/" />
+        <updated>2020-06-30T10:12:58+00:00</updated>
+        <title>Question about Go channels.</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/Carl_Ji</name>
+            <uri>https://www.reddit.com/user/Carl_Ji</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/Carl_Ji&quot;&gt; /u/Carl_Ji &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://github.com/qiniu/goc&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hijm4a/a_comprehensive_coverage_testing_system_for_the/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hijm4a</id>
+        <link href="https://www.reddit.com/r/golang/comments/hijm4a/a_comprehensive_coverage_testing_system_for_the/" />
+        <updated>2020-06-30T08:54:22+00:00</updated>
+        <title>A Comprehensive Coverage Testing System for The Go Programming Language</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/srxf</name>
+            <uri>https://www.reddit.com/user/srxf</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/srxf&quot;&gt; /u/srxf &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://stevenferrer.github.io/posts/multi-select-facet-solr-vue-go&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hijv8c/multiselect_facet_with_solr_vue_and_go/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hijv8c</id>
+        <link href="https://www.reddit.com/r/golang/comments/hijv8c/multiselect_facet_with_solr_vue_and_go/" />
+        <updated>2020-06-30T09:15:18+00:00</updated>
+        <title>Multi-Select Facet with Solr, Vue and Go</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/pandeykartikey</name>
+            <uri>https://www.reddit.com/user/pandeykartikey</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/pandeykartikey&quot;&gt; /u/pandeykartikey &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://github.com/pandeykartikey/goto&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hhylaa/goto_a_dynamically_typed_interpreted_programming/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hhylaa</id>
+        <link href="https://www.reddit.com/r/golang/comments/hhylaa/goto_a_dynamically_typed_interpreted_programming/" />
+        <updated>2020-06-29T12:02:14+00:00</updated>
+        <title>Goto: A dynamically typed interpreted programming language written in go.</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/hyperTrashPanda</name>
+            <uri>https://www.reddit.com/user/hyperTrashPanda</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/hyperTrashPanda&quot;&gt; /u/hyperTrashPanda &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://tpaschalis.github.io/channels-limitations-speed/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hilolk/what_are_the_limits_of_channels_and_just_how_fast/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hilolk</id>
+        <link href="https://www.reddit.com/r/golang/comments/hilolk/what_are_the_limits_of_channels_and_just_how_fast/" />
+        <updated>2020-06-30T11:36:32+00:00</updated>
+        <title>What are the limits of channels, and just how 'fast' are they?</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/greenkiweez</name>
+            <uri>https://www.reddit.com/user/greenkiweez</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;I&amp;#39;ve come across a project with files ending with _debug.go. For example there are two files in a folder. One is called security.go, the other is security_debug.go. Both these files have the same function signatures, so I&amp;#39;m not sure how the package even compiles The debug file has slightly modified function definitions. &lt;/p&gt; &lt;p&gt;I can&amp;#39;t really find a reference to this. Are _debug files a golang feature similar to _test.go, or am I looking at some in-house solution, maybe an IDE feature?&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/greenkiweez&quot;&gt; /u/greenkiweez &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hikygn/q_files_with_debuggo_suffix/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hikygn/q_files_with_debuggo_suffix/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hikygn</id>
+        <link href="https://www.reddit.com/r/golang/comments/hikygn/q_files_with_debuggo_suffix/" />
+        <updated>2020-06-30T10:42:08+00:00</updated>
+        <title>[Q] files with _debug.go suffix</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/jfeliu007</name>
+            <uri>https://www.reddit.com/user/jfeliu007</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;&amp;#x200B;&lt;/p&gt; &lt;p&gt;&lt;a href=&quot;https://preview.redd.it/all3zj4ekw751.jpg?width=922&amp;amp;format=pjpg&amp;amp;auto=webp&amp;amp;s=299256ff70387d98a40ad261d40a9624838a757a&quot;&gt;This classy guy can help you understand the code better! www.dumels.com&lt;/a&gt;&lt;/p&gt; &lt;p&gt;In the past few months, I have been working with a friend on a website to create UML class diagrams of public GitHub projects made in GoLang. Last year, I made a post where I showed a library I built called &lt;a href=&quot;https://github.com/jfeliu007/goplantuml&quot;&gt;GoPlantUml&lt;/a&gt;; the response was very positive. Many provided me with issues they found and suggestions that I could include as features in the project. But the feedback that worried me more was the fact that some users didn’t know about Plantuml at all. So, I spoke with a friend of mine, and we built a service that renders the diagram right from a &lt;a href=&quot;https://github.com&quot;&gt;github.com&lt;/a&gt; public repository.&lt;/p&gt; &lt;p&gt;&lt;a href=&quot;https://www.dumels.com&quot;&gt;https://www.dumels.com&lt;/a&gt;&lt;/p&gt; &lt;p&gt;We discovered that using the library manually, was very useful for us when we wanted to understand how other libraries worked. However, downloading the code, converting it to Plantuml, and rendering it was a bit slow for our liking. With &lt;a href=&quot;https://www.dumels.com&quot;&gt;www.dumels.com&lt;/a&gt;, we speed this process. I shared a bit more information on &lt;a href=&quot;https://www.jazzcoding.com/a-brand-new-way-to-understand-your-code/&quot;&gt;this blog post&lt;/a&gt; if you are interested in reading a bit more about the project.&lt;/p&gt; &lt;p&gt;&amp;#x200B;&lt;/p&gt; &lt;p&gt;I hope you guys can find it useful as well.&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/jfeliu007&quot;&gt; /u/jfeliu007 &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hi3zhe/converting_your_githubcom_public_golang_repo_into/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hi3zhe/converting_your_githubcom_public_golang_repo_into/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hi3zhe</id>
+        <link href="https://www.reddit.com/r/golang/comments/hi3zhe/converting_your_githubcom_public_golang_repo_into/" />
+        <updated>2020-06-29T17:14:22+00:00</updated>
+        <title>Converting your GitHub.com public GoLang repo into a class diagram</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/kvothe1956</name>
+            <uri>https://www.reddit.com/user/kvothe1956</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/kvothe1956&quot;&gt; /u/kvothe1956 &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://qvault.io/2020/06/29/make-new-and-literals-cheat-sheet-slice-and-map-initialization-in-go/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hhzwc5/make_new_and_literals_cheat_sheet_slice_and_map/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hhzwc5</id>
+        <link href="https://www.reddit.com/r/golang/comments/hhzwc5/make_new_and_literals_cheat_sheet_slice_and_map/" />
+        <updated>2020-06-29T13:32:07+00:00</updated>
+        <title>Make, New and Literals Cheat Sheet - Slice and Map Initialization in Go</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/ermanimer</name>
+            <uri>https://www.reddit.com/user/ermanimer</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;Hello,&lt;/p&gt; &lt;p&gt;I am using these libraries to communicate with Siemens S7 and Modbus Tcp devices in industrial projects.&lt;/p&gt; &lt;p&gt;&lt;a href=&quot;https://github.com/ermanimer/ict&quot;&gt;https://github.com/ermanimer/ict&lt;/a&gt;&lt;/p&gt; &lt;p&gt;All comments are wellcome...&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/ermanimer&quot;&gt; /u/ermanimer &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hi94gt/industrial_communication_tools/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hi94gt/industrial_communication_tools/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hi94gt</id>
+        <link href="https://www.reddit.com/r/golang/comments/hi94gt/industrial_communication_tools/" />
+        <updated>2020-06-29T21:21:57+00:00</updated>
+        <title>Industrial Communication Tools</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/LandonClipp</name>
+            <uri>https://www.reddit.com/user/LandonClipp</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/chigopher/pathlib&quot;&gt;https://github.com/chigopher/pathlib&lt;/a&gt;&lt;/p&gt; &lt;p&gt;I&amp;#39;ve noticed that Golang has really been lacking its own object-oriented pathlib library (basically, an equivalent to Python&amp;#39;s pathlib). I decided to make my own and build it on top of Afero.&lt;/p&gt; &lt;p&gt;There have been a few attempts at building an object-oriented pathlib library, but none of them have seemed to gain any traction, and none that I could see utilized Afero for filesystem abstraction.&lt;/p&gt; &lt;p&gt;The API is in the early stages of development, and I am eager to hear the community&amp;#39;s wants/desires on what the API should include and look like. Take a look and tell me what you think of it!&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/LandonClipp&quot;&gt; /u/LandonClipp &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hig84n/githubcomchigopherpathlib_golangs_own/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hig84n/githubcomchigopherpathlib_golangs_own/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hig84n</id>
+        <link href="https://www.reddit.com/r/golang/comments/hig84n/githubcomchigopherpathlib_golangs_own/" />
+        <updated>2020-06-30T04:27:29+00:00</updated>
+        <title>github.com/chigopher/pathlib: Golang's own object-oriented pathlib library</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/izzypz</name>
+            <uri>https://www.reddit.com/user/izzypz</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;So I&amp;#39;ve been reading about dependency injection and its benefits for testing. But when I do some work and want to use this dependency injection I face some problem if the class/struct has many dependencies. So let&amp;#39;s say we have struct person which can talk and walk.&lt;/p&gt; &lt;pre&gt;&lt;code&gt;type Walker interface { Walk() } type Talker interface { Talk() } type Person struct { Walker Walker Talker Talker } func (p Person) Walk() { return p.Walker.Walk() } func (p Person) Talk() { return p.Talker.Talk() } &lt;/code&gt;&lt;/pre&gt; &lt;p&gt;My question is if the Person struct needs to be able to eat and breath also, do I just add the eater and breather in the field of Person struct? because if there&amp;#39;s too many field to be filled when creating Person object I think it would be inconvenient for the consumer? Or if it needs too much dependencies does it mean the design is bad?&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/izzypz&quot;&gt; /u/izzypz &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hiib8r/struct_dependency/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hiib8r/struct_dependency/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hiib8r</id>
+        <link href="https://www.reddit.com/r/golang/comments/hiib8r/struct_dependency/" />
+        <updated>2020-06-30T07:07:35+00:00</updated>
+        <title>struct dependency</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/Akustic646</name>
+            <uri>https://www.reddit.com/user/Akustic646</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;Hello, i&amp;#39;ve been working on an issue and it has me completely stumped!&lt;/p&gt; &lt;p&gt;The same command is run on all three machines and within a docker build step on each of them. They all have identical copies of the github repository with the same files and no modifications. The github repo contains the results of go mod tidy and go mod vendor&lt;/p&gt; &lt;p&gt;The dockerfile looks like this&lt;/p&gt; &lt;pre&gt;&lt;code&gt;FROM golang:1.14.4 AS builder RUN mkdir /app WORKDIR /app ADD . /app/ RUN go test ./... &lt;/code&gt;&lt;/pre&gt; &lt;p&gt;Machine 1 and 2 successfully pass the test step and continue on to build a successful docker image, machine 3 fails on the tests due to a problem with the Kubernetes client that is being used.&lt;/p&gt; &lt;pre&gt;&lt;code&gt;# k8s.io/client-go/kubernetes/typed/authorization/v1 vendor/k8s.io/client-go/kubernetes/typed/authorization/v1/authorization_client.go:29:2: undefined: LocalSubjectAccessReviewsGetter k8s.io/client-go/kubernetes/typed/authorization/v1beta1 vendor/k8s.io/client-go/kubernetes/typed/authorization/v1beta1/authorization_client.go:29:2: undefined: LocalSubjectAccessReviewsGetter &lt;/code&gt;&lt;/pre&gt; &lt;p&gt;I can tell from the error message that it is indeed using the vendor directory. Why would this succeed on two out of three computers all running the build within the same docker container?&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/Akustic646&quot;&gt; /u/Akustic646 &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hie995/strange_vendoring_behavior/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hie995/strange_vendoring_behavior/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hie995</id>
+        <link href="https://www.reddit.com/r/golang/comments/hie995/strange_vendoring_behavior/" />
+        <updated>2020-06-30T02:17:25+00:00</updated>
+        <title>Strange Vendoring Behavior</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/iangregsondev</name>
+            <uri>https://www.reddit.com/user/iangregsondev</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;Hi,&lt;/p&gt; &lt;p&gt;Does anyone know of a library that exists or the suggested way to copy a struct into another struct . A kind of mapper.&lt;/p&gt; &lt;p&gt;I am trying to do something similar to this explained in this video&lt;/p&gt; &lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=nLskCRJOdxM&quot;&gt;https://www.youtube.com/watch?v=nLskCRJOdxM&lt;/a&gt; (see video starting at 13:00)&lt;/p&gt; &lt;p&gt;&amp;#x200B;&lt;/p&gt; &lt;p&gt;The scenario:&lt;/p&gt; &lt;p&gt;&amp;#x200B;&lt;/p&gt; &lt;p&gt;I have&lt;/p&gt; &lt;p&gt;Handler (HTTP)&lt;/p&gt; &lt;p&gt;gRPC&lt;/p&gt; &lt;p&gt;&amp;#x200B;&lt;/p&gt; &lt;p&gt;The above 2 transports have their own way of dealing with things, HTTP Handler uses a request / response, gRPC pb generated files.&lt;/p&gt; &lt;p&gt;&amp;#x200B;&lt;/p&gt; &lt;p&gt;Controller - both the gRPC and Http handler would talk to the controller in generic / agnostic way. So I need a good way of mapping from Handler / gRPC into a &amp;quot;ControllerRequest&amp;quot; and then the Controller would return its ControllerResponse (again not specific to any transport) - do I need a way of mapping from a ControllerResponse back to the Http Handler Response or pb response.&lt;/p&gt; &lt;p&gt;&amp;#x200B;&lt;/p&gt; &lt;p&gt;This keeps the controller agnostic and can be shared amongst different transports.&lt;/p&gt; &lt;p&gt;I was looking for the best way of doing this , can anyone help ?&lt;/p&gt; &lt;p&gt;&amp;#x200B;&lt;/p&gt; &lt;p&gt;Thanks.&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/iangregsondev&quot;&gt; /u/iangregsondev &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/higzfz/the_best_way_for_copying_a_struct_into_a_struct/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/higzfz/the_best_way_for_copying_a_struct_into_a_struct/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_higzfz</id>
+        <link href="https://www.reddit.com/r/golang/comments/higzfz/the_best_way_for_copying_a_struct_into_a_struct/" />
+        <updated>2020-06-30T05:21:59+00:00</updated>
+        <title>The best way for copying a struct into a struct? (Mapping)</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/komuW</name>
+            <uri>https://www.reddit.com/user/komuW</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/komuW&quot;&gt; /u/komuW &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://github.com/thesephist/ink&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hhzxmg/ink_is_a_minimal_programming_languagewritten_in/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hhzxmg</id>
+        <link href="https://www.reddit.com/r/golang/comments/hhzxmg/ink_is_a_minimal_programming_languagewritten_in/" />
+        <updated>2020-06-29T13:34:23+00:00</updated>
+        <title>Ink is a minimal programming language(written in Go) inspired by modern JavaScript and Go, with functional style.</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/illegal_semicolon</name>
+            <uri>https://www.reddit.com/user/illegal_semicolon</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/maxence-charriere/go-app&quot;&gt;go-app&lt;/a&gt; is a package to build progressive web apps with Go and WebAssembly.&lt;/p&gt; &lt;p&gt;Version 7 was released today, it now supports generating a static site, which can then be deployed on github pages.&lt;/p&gt; &lt;p&gt;I used this to build a web interface for &lt;a href=&quot;https://github.com/lu4p/astextract&quot;&gt;astextract&lt;/a&gt;: &lt;a href=&quot;https://lu4p.github.io/astextract/&quot;&gt;https://lu4p.github.io/astextract/&lt;/a&gt;&lt;/p&gt; &lt;p&gt;It was really easy (took only a few hours).&lt;/p&gt; &lt;p&gt;Full Changelog: &lt;a href=&quot;https://github.com/maxence-charriere/go-app/releases/tag/v7.0.2&quot;&gt;https://github.com/maxence-charriere/go-app/releases/tag/v7.0.2&lt;/a&gt;&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/illegal_semicolon&quot;&gt; /u/illegal_semicolon &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hhqyte/goapp_pwas_can_now_be_deployed_to_github_pages/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hhqyte/goapp_pwas_can_now_be_deployed_to_github_pages/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hhqyte</id>
+        <link href="https://www.reddit.com/r/golang/comments/hhqyte/goapp_pwas_can_now_be_deployed_to_github_pages/" />
+        <updated>2020-06-29T01:45:29+00:00</updated>
+        <title>go-app PWAs can now be deployed to github pages</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/vroomerify</name>
+            <uri>https://www.reddit.com/user/vroomerify</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;I&amp;#39;ve been trying to submit a PR to the go compiler. I notice that there&amp;#39;s a lot of &amp;quot;undefined symbols&amp;quot; etc. from the language server I am using. I&amp;#39;m pretty sure this is because I don&amp;#39;t have $GOPATH and $GOROOT set properly.&lt;/p&gt; &lt;p&gt;What should I set them to when working on the compiler itself?&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/vroomerify&quot;&gt; /u/vroomerify &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hie7eh/when_working_on_the_go_compiler_what_should_i_set/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hie7eh/when_working_on_the_go_compiler_what_should_i_set/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hie7eh</id>
+        <link href="https://www.reddit.com/r/golang/comments/hie7eh/when_working_on_the_go_compiler_what_should_i_set/" />
+        <updated>2020-06-30T02:14:08+00:00</updated>
+        <title>When working on the Go compiler, what should I set $GOPATH and $GOROOT to?</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/hnyakwai</name>
+            <uri>https://www.reddit.com/user/hnyakwai</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/hnyakwai&quot;&gt; /u/hnyakwai &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://github.com/elliotmr/plug&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hhyukq/plug_minimal_protobuf_generated_plugins_for_go/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hhyukq</id>
+        <link href="https://www.reddit.com/r/golang/comments/hhyukq/plug_minimal_protobuf_generated_plugins_for_go/" />
+        <updated>2020-06-29T12:21:06+00:00</updated>
+        <title>plug - Minimal protobuf generated plugins for go</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/EvoNext</name>
+            <uri>https://www.reddit.com/user/EvoNext</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/EvoNext&quot;&gt; /u/EvoNext &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://medium.com/@fabisiakradoslaw/how-we-improved-performance-and-scored-100-100-by-migrating-to-hugo-s3-and-amp-step-by-step-d59283f8ae4b?source=friends_link&amp;amp;sk=33b66b4f72bb4961241340c38acb56dd&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hhz8d7/how_we_improved_performance_and_scored_100100_by/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hhz8d7</id>
+        <link href="https://www.reddit.com/r/golang/comments/hhz8d7/how_we_improved_performance_and_scored_100100_by/" />
+        <updated>2020-06-29T12:47:51+00:00</updated>
+        <title>How we improved performance and scored 100/100 by migrating to Hugo, S3 and AMP step by step tutorial</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/devilyoushy</name>
+            <uri>https://www.reddit.com/user/devilyoushy</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/devilyoushy&quot;&gt; /u/devilyoushy &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://akondas.com/Tales-of-Docker-and-Go-Part-II/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hhy176/using_docker_private_go_modules_from_bitbucket/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hhy176</id>
+        <link href="https://www.reddit.com/r/golang/comments/hhy176/using_docker_private_go_modules_from_bitbucket/" />
+        <updated>2020-06-29T11:17:56+00:00</updated>
+        <title>Using Docker &amp; private Go modules from Bitbucket</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/Witcher_92</name>
+            <uri>https://www.reddit.com/user/Witcher_92</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;Since Go Team does not have yet full answer for the problem of versioning tools written in Go, we wrote a small open-source CLI tool that makes it easy and is built on Go Modules: &lt;a href=&quot;https://github.com/bwplotka/bingo&quot;&gt;https://github.com/bwplotka/bingo&lt;/a&gt; &lt;/p&gt; &lt;p&gt;You can read about it more here: &lt;a href=&quot;https://www.bwplotka.dev/2020/bingo/&quot;&gt;https://www.bwplotka.dev/2020/bingo/&lt;/a&gt;&lt;/p&gt; &lt;p&gt;Feel free to check it out, give us feedback and contribute! It&amp;#39;s open-source so we can improve it together! (: &lt;/p&gt; &lt;p&gt;&amp;#x200B;&lt;/p&gt; &lt;p&gt;HackerNews discussion: &lt;a href=&quot;https://news.ycombinator.com/item?id=23676587&quot;&gt;https://news.ycombinator.com/item?id=23676587&lt;/a&gt;&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/Witcher_92&quot;&gt; /u/Witcher_92 &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hhyaxr/effortless_versioning_of_go_tools_for_your/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hhyaxr/effortless_versioning_of_go_tools_for_your/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hhyaxr</id>
+        <link href="https://www.reddit.com/r/golang/comments/hhyaxr/effortless_versioning_of_go_tools_for_your/" />
+        <updated>2020-06-29T11:40:05+00:00</updated>
+        <title>Effortless Versioning of Go Tools for Your Project? BinGo!</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/Clivern</name>
+            <uri>https://www.reddit.com/user/Clivern</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/Clivern&quot;&gt; /u/Clivern &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://github.com/Clivern/Beetle&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hhzprf/clivernbeetle_kubernetes_multicluster_deployment/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hhzprf</id>
+        <link href="https://www.reddit.com/r/golang/comments/hhzprf/clivernbeetle_kubernetes_multicluster_deployment/" />
+        <updated>2020-06-29T13:20:18+00:00</updated>
+        <title>Clivern/Beetle - Kubernetes multi-cluster deployment automation service</title>
+    </entry>
+    <entry>
+        <author>
+            <name>/u/nevertras</name>
+            <uri>https://www.reddit.com/user/nevertras</uri>
+        </author>
+        <category term="golang" label="r/golang"/>
+        <content type="html">&amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/nevertras&quot;&gt; /u/nevertras &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://github.com/Evertras/go-interface-examples/tree/master/local-interfaces&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hha3pa/why_you_should_write_interfaces_perpackage/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;</content>
+        <id>t3_hha3pa</id>
+        <link href="https://www.reddit.com/r/golang/comments/hha3pa/why_you_should_write_interfaces_perpackage/" />
+        <updated>2020-06-28T07:05:18+00:00</updated>
+        <title>Why you should write interfaces per-package</title>
+    </entry>
+</feed>
