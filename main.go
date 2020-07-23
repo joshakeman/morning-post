@@ -50,9 +50,11 @@ func GetURL(s string) (string, error) {
 	esc := html.UnescapeString(s)
 	log.Println(esc)
 	doc, err := htmlquery.Parse(strings.NewReader(esc))
+  
 	if err != nil {
 		return "", err
 	}
+  
 	a := htmlquery.FindOne(doc, "//a[2]@href")
 	href := htmlquery.InnerText(a)
 	return href, nil
