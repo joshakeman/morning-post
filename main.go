@@ -29,32 +29,38 @@ func NewClient() Client {
 	}
 }
 
-func (c Client) getFeed(url string) (Feed, error) {
+func (c Client) getFeed(url string) (HNfeed, error) {
 	resp, err := c.HTTPClient.Get(url)
 	if err != nil {
-		return Feed{}, err
+		return HNfeed{}, err
 	}
 	defer resp.Body.Close()
 	data, err := ioutil.ReadAll(resp.Body)
+	log.Println(len(data))
 	if err != nil {
-		return Feed{}, err
+		return HNfeed{}, err
 	}
-	var feed Feed
+	var feed HNfeed
 	if err = xml.Unmarshal(data, &feed); err != nil {
-		return Feed{}, fmt.Errorf("decoding xml %q: %v", data, err)
+		return HNfeed{}, fmt.Errorf("decoding xml %q: %v", data, err)
 	}
 	return feed, nil
 }
 
 func GetURL(s string) (string, error) {
 	esc := html.UnescapeString(s)
-	log.Println(esc)
+
 	doc, err := htmlquery.Parse(strings.NewReader(esc))
 	if err != nil {
 		return "", err
 	}
-	a := htmlquery.FindOne(doc, "//a[2]@href")
-	href := htmlquery.InnerText(a)
+	a := htmlquery.Find(doc, "//a@href")
+
+	// for _, v := range a {
+	// 	log.Println(*v)
+	// }
+	// a2 := htmlquery.FindOne(doc, "//a[1]@href")
+	href := htmlquery.SelectAttr(a[1], "href")
 	return href, nil
 }
 
@@ -75,3 +81,38 @@ type Entry struct {
 }
 
 // Created new Link struct that's embedded in Entry, allowing us to pull href value from that link.
+
+type HNfeed struct {
+	XMLName xml.Name `xml:"rss"`
+	// Text    string   `xml:",chardata"`
+	// Version string   `xml:"version,attr"`
+	// Dc      string   `xml:"dc,attr"`
+	// Atom    string   `xml:"atom,attr"`
+	Channel struct {
+		// Text  string `xml:",chardata"`
+		// Title string `xml:"title"`
+		// Link  struct {
+		// 	Text string `xml:",chardata"`
+		// 	Href string `xml:"href,attr"`
+		// 	Rel  string `xml:"rel,attr"`
+		// 	Type string `xml:"type,attr"`
+		// } `xml:"link"`
+		// Description   string `xml:"description"`
+		// Docs          string `xml:"docs"`
+		// Generator     string `xml:"generator"`
+		// LastBuildDate string `xml:"lastBuildDate"`
+		Items []struct {
+			// Text        string `xml:",chardata"`
+			// Title       string `xml:"title"`
+			// Description string `xml:"description"`
+			// PubDate     string `xml:"pubDate"`
+			Link string `xml:"link"`
+			// Creator     string `xml:"creator"`
+			// Comments    string `xml:"comments"`
+			// Guid        struct {
+			// 	Text        string `xml:",chardata"`
+			// 	IsPermaLink string `xml:"isPermaLink,attr"`
+			// } `xml:"guid"`
+		} `xml:"item"`
+	} `xml:"channel"`
+}
