@@ -3,13 +3,10 @@ package main
 import (
 	"encoding/xml"
 	"fmt"
-	"html"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strings"
-
-	"github.com/antchfx/htmlquery"
 )
 
 // func main() {
@@ -47,21 +44,20 @@ func (c Client) getFeed(url string) (HNfeed, error) {
 	return feed, nil
 }
 
-func GetURL(s string) (string, error) {
-	esc := html.UnescapeString(s)
-
-	doc, err := htmlquery.Parse(strings.NewReader(esc))
+func ReadFeedFrom(r io.Reader) (HNfeed, error) {
+	data, err := ioutil.ReadAll(r)
 	if err != nil {
-		return "", err
+		return HNfeed{}, err
 	}
-	a := htmlquery.Find(doc, "//a@href")
+	var feed HNfeed
+	if err = xml.Unmarshal(data, &feed); err != nil {
+		return HNfeed{}, fmt.Errorf("decoding xml %q: %v", data, err)
+	}
+	return feed, nil
+}
 
-	// for _, v := range a {
-	// 	log.Println(*v)
-	// }
-	// a2 := htmlquery.FindOne(doc, "//a[1]@href")
-	href := htmlquery.SelectAttr(a[1], "href")
-	return href, nil
+func GetURLs(f HNfeed) ([]string, error) {
+	return []string{}, nil
 }
 
 type Link struct {
@@ -83,36 +79,14 @@ type Entry struct {
 // Created new Link struct that's embedded in Entry, allowing us to pull href value from that link.
 
 type HNfeed struct {
-	XMLName xml.Name `xml:"rss"`
-	// Text    string   `xml:",chardata"`
-	// Version string   `xml:"version,attr"`
-	// Dc      string   `xml:"dc,attr"`
-	// Atom    string   `xml:"atom,attr"`
-	Channel struct {
-		// Text  string `xml:",chardata"`
-		// Title string `xml:"title"`
-		// Link  struct {
-		// 	Text string `xml:",chardata"`
-		// 	Href string `xml:"href,attr"`
-		// 	Rel  string `xml:"rel,attr"`
-		// 	Type string `xml:"type,attr"`
-		// } `xml:"link"`
-		// Description   string `xml:"description"`
-		// Docs          string `xml:"docs"`
-		// Generator     string `xml:"generator"`
-		// LastBuildDate string `xml:"lastBuildDate"`
-		Items []struct {
-			// Text        string `xml:",chardata"`
-			// Title       string `xml:"title"`
-			// Description string `xml:"description"`
-			// PubDate     string `xml:"pubDate"`
-			Link string `xml:"link"`
-			// Creator     string `xml:"creator"`
-			// Comments    string `xml:"comments"`
-			// Guid        struct {
-			// 	Text        string `xml:",chardata"`
-			// 	IsPermaLink string `xml:"isPermaLink,attr"`
-			// } `xml:"guid"`
-		} `xml:"item"`
-	} `xml:"channel"`
+	// XMLName xml.Name `xml:"rss"`
+	Channel Channel `xml:"channel"`
+}
+
+type Channel struct {
+	Items []Item `xml:"item"`
+}
+
+type Item struct {
+	Link string `xml:"link"`
 }

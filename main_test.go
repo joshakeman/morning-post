@@ -5,7 +5,10 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"strings"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestGetFeed(t *testing.T) {
@@ -30,32 +33,59 @@ func TestGetFeed(t *testing.T) {
 	}
 }
 
+func TestReadFeedFrom(t *testing.T) {
+	t.Parallel()
+
+	want := HNfeed{
+		Channel: Channel{
+			Items: []Item{
+				{Link: "https://www.reddit.com/r/golang/comments/56oirg/api_encoding_shootout_binary_data_protobuf_vs/"},
+				{Link: "https://github.com/ansd/lastpass-go"},
+				{Link: "https://www.pixelstech.net/article/1599275392-Implement-struct-no-copy-in-GoLang"},
+			},
+		},
+	}
+
+	r := strings.NewReader(`<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
+							<channel>
+								<item><link>https://www.reddit.com/r/golang/comments/56oirg/api_encoding_shootout_binary_data_protobuf_vs/</link></item>
+								<item><link>https://github.com/ansd/lastpass-go</link></item>
+								<item><link>https://www.pixelstech.net/article/1599275392-Implement-struct-no-copy-in-GoLang</link></item>
+							</channel>
+							</rss>`)
+	got, err := ReadFeedFrom(r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !cmp.Equal(want, got) {
+		t.Error(cmp.Diff(want, got))
+	}
+}
+
 // func TestGetURL(t *testing.T) {
 // 	t.Parallel()
 
-// 	tcs := []struct {
-// 		input string
-// 		want  string
-// 	}{
-// 		{
-// 			input: "&amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/Pmgubbey1&quot;&gt; /u/Pmgubbey1 &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.works-hub.com/jobs/remote-senior-go-engineer-e69?utm_source=Linkedin&amp;amp;utm_medium=Recruiter_Social&amp;amp;utm_campaign=p.gubbey&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hil0ox/senior_remote_golang_job/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;",
-// 			want:  "https://www.works-hub.com/jobs/remote-senior-go-engineer-e69?utm_source=Linkedin&utm_medium=Recruiter_Social&utm_campaign=p.gubbey",
-// 		},
-// 		{
-// 			input: "&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;I am writing a multi-coroutine task processing engine. Anyone want with me together.&lt;/p&gt; &lt;p&gt;I have 2+ years experience with golang, but i am just like a beginner. Maybe this is the philosophy of golang.&lt;/p&gt; &lt;p&gt;&lt;a href=&quot;https://github.com/90634/gotaskengine&quot;&gt;https://github.com/90634/gotaskengine&lt;/a&gt;&lt;/p&gt; &lt;p&gt;This is my first post. Is this correct behavior?&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/dafsic&quot;&gt; /u/dafsic &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hifopt/a_sample_task_engine/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/golang/comments/hifopt/a_sample_task_engine/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;",
-// 			want:  "https://github.com/90634/gotaskengine",
-// 		},
-// 	}
+// 	// tcs := []struct {
+// 	// 	input HNfeed
+// 	// 	want  string
+// 	// }{
+// 	// 	input
+// 	// }
 
-// 	for _, tc := range tcs {
-// 		got, err := GetURL(tc.input)
-// 		if err != nil {
-// 			t.Fatal(err)
-// 		}
-// 		if !cmp.Equal(tc.want, got) {
-// 			t.Error(cmp.Diff(tc.want, got))
-// 		}
+// 	want := []string{
+// 		"https://www.reddit.com/r/golang/comments/56oirg/api_encoding_shootout_binary_data_protobuf_vs/",
 // 	}
+// 	feed := getFeed()
+// 	got, err := GetURLs()
+// 	// for _, tc := range tcs {
+// 	// 	got, err := GetURLs(tc.input)
+// 	// 	if err != nil {
+// 	// 		t.Fatal(err)
+// 	// 	}
+// 	// 	if !cmp.Equal(tc.want, got) {
+// 	// 		t.Error(cmp.Diff(tc.want, got))
+// 	// 	}
+// 	// }
 // }
 
 // NOTES:
