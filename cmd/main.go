@@ -2,12 +2,19 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
 
 	"github.com/joshakeman/morning_post"
 )
 
 func main() {
-	links := morning_post.HNLinks("golang")
-	fmt.Println(links)
+	links, err := morning_post.HNLinks(os.Args[1])
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, link := range links {
+		fmt.Println(link)
+	}
 }
 
