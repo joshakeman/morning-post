@@ -2,9 +2,7 @@ package main
 
 import (
 	"encoding/xml"
-	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 )
@@ -52,13 +50,9 @@ func (c Client) getFeed(url string) (io.Reader, error) {
 }
 
 func ReadFeedFrom(r io.Reader) (HNfeed, error) {
-	data, err := ioutil.ReadAll(r)
-	if err != nil {
-		return HNfeed{}, err
-	}
 	var feed HNfeed
-	if err = xml.Unmarshal(data, &feed); err != nil {
-		return HNfeed{}, fmt.Errorf("decoding xml %q: %v", data, err)
+	if err := xml.NewDecoder(r).Decode(&feed); err != nil {
+		return HNfeed{}, err
 	}
 	return feed, nil
 }
