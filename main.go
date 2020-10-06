@@ -9,12 +9,20 @@ import (
 	"net/http"
 )
 
-// func main() {
-// 	_, err := getFeed("https://www.reddit.com/r/golang/.rss?format=xml")
-// 	if err != nil {
-// 		log.Println(err)
-// 	}
-// }
+func main() {
+	c := NewClient()
+	reader, err := c.getFeed("https://hnrss.org/newest?q=Golang")
+	if err != nil {
+		log.Println(err)
+	}
+	links, err := ReadFeedFrom(reader)
+	if err != nil {
+		log.Println(err)
+	}
+	for _, v := range links.Channel.Items {
+		log.Printf(v.Link)
+	}
+}
 
 type Client struct {
 	HTTPClient *http.Client
@@ -26,22 +34,21 @@ func NewClient() Client {
 	}
 }
 
-func (c Client) getFeed(url string) (HNfeed, error) {
+func (c Client) getFeed(url string) (io.Reader, error) {
 	resp, err := c.HTTPClient.Get(url)
 	if err != nil {
-		return HNfeed{}, err
+		return nil, err
 	}
 	defer resp.Body.Close()
-	data, err := ioutil.ReadAll(resp.Body)
-	log.Println(len(data))
-	if err != nil {
-		return HNfeed{}, err
-	}
-	var feed HNfeed
-	if err = xml.Unmarshal(data, &feed); err != nil {
-		return HNfeed{}, fmt.Errorf("decoding xml %q: %v", data, err)
-	}
-	return feed, nil
+	// feed, err := ioutil.ReadAll(resp.Body)
+	// if err != nil {
+	// 	return resp.Body{}, err
+	// }
+	// var feed HNfeed
+	// if err = xml.Unmarshal(data, &feed); err != nil {
+	// 	return HNfeed{}, fmt.Errorf("decoding xml %q: %v", data, err)
+	// }
+	return resp.Body, nil
 }
 
 func ReadFeedFrom(r io.Reader) (HNfeed, error) {
@@ -59,6 +66,8 @@ func ReadFeedFrom(r io.Reader) (HNfeed, error) {
 func GetURLs(f HNfeed) ([]string, error) {
 	return []string{}, nil
 }
+
+/* TYPES */
 
 type Link struct {
 	Href string `xml:"href,attr"`
